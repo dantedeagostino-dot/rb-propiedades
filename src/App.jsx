@@ -56,7 +56,7 @@ const HomePage = () => {
     { name: 'Inicio', href: '#home' },
     { name: 'Sobre Mí', href: '#about' },
     { name: 'Servicios', href: '#services' },
-    { name: 'Método RB', href: '#method' },
+    { name: 'Método RV', href: '#method' },
     { name: 'Cobertura', href: '#coverage' },
     { name: 'Análisis', href: '#analysis' },
   ];
@@ -100,7 +100,7 @@ const HomePage = () => {
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-16">
           <div className="flex flex-col">
-            <span className="text-xl font-bold tracking-tight text-[#1D1D1F]">RB PROPIEDADES</span>
+            <span className="text-xl font-bold tracking-tight text-[#1D1D1F]">RV PROPIEDADES</span>
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#2F4F4F] font-semibold">Ramiro Villafañe</span>
           </div>
 
@@ -205,7 +205,7 @@ const HomePage = () => {
                 Soy <span className="text-[#1D1D1F] font-semibold text-base">Licenciado en Publicidad</span>, y aplico las herramientas del marketing y la comunicación al mercado de Real Estate.
               </p>
               <p>
-                RB Propiedades no es una inmobiliaria tradicional. Es un proyecto personal basado en el <strong>análisis, la percepción de valor y la narrativa estratégica</strong>.
+                RV Propiedades no es una inmobiliaria tradicional. Es un proyecto personal basado en el <strong>análisis, la percepción de valor y la narrativa estratégica</strong>.
               </p>
               <p>
                 Trabajo en alianza con <strong>Ignacio Campodónico Propiedades</strong>, lo que me permite ofrecer respaldo jurídico y operativo integral manteniendo un trato directo y personalizado.
@@ -270,7 +270,7 @@ const HomePage = () => {
       <section id="method" className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20">
-            <span className="text-[#2F4F4F] font-semibold tracking-widest uppercase text-sm mb-4 block">El Método RB</span>
+            <span className="text-[#2F4F4F] font-semibold tracking-widest uppercase text-sm mb-4 block">El Método RV</span>
             <h3 className="text-4xl font-bold tracking-tight">Una hoja de ruta estratégica</h3>
           </div>
 
@@ -454,7 +454,7 @@ const HomePage = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
             <div>
               <div className="flex flex-col mb-4">
-                <span className="text-xl font-bold tracking-tight text-[#1D1D1F]">RB PROPIEDADES</span>
+                <span className="text-xl font-bold tracking-tight text-[#1D1D1F]">RV PROPIEDADES</span>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#2F4F4F] font-semibold">Ramiro Villafañe</span>
               </div>
               <p className="text-sm text-gray-400 max-w-xs">
@@ -482,7 +482,7 @@ const HomePage = () => {
           </div>
 
           <div className="mt-16 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between gap-4 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-            <p>&copy; 2024 RB PROPIEDADES. TODOS LOS DERECHOS RESERVADOS.</p>
+            <p>&copy; 2024 RV PROPIEDADES. TODOS LOS DERECHOS RESERVADOS.</p>
             <div className="flex space-x-6">
               <a href="#" className="hover:text-[#2F4F4F]">Privacidad</a>
               <a href="#" className="hover:text-[#2F4F4F]">Términos</a>
