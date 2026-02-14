@@ -15,6 +15,10 @@ import {
   Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ramiroProfile from './assets/ramiro.jpeg';
+import prop1 from './assets/prop1.jpeg';
+import prop2 from './assets/prop2.jpeg';
+import prop3 from './assets/prop3.jpeg';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,6 +66,12 @@ const App = () => {
     "San Isidro": ["Acassuso", "Martínez", "Beccar", "La Horqueta", "San Isidro Centro"],
     "Escobar": ["Puertos", "El Cantón", "San Matías", "El Naudir"]
   };
+
+  const blogPosts = [
+    { title: "Tendencias inmobiliarias 2024", date: "Marzo 2024", tag: "TENDENCIAS", image: prop1 },
+    { title: "Movimiento de tasas y crédito", date: "Febrero 2024", tag: "FINANZAS", image: prop2 },
+    { title: "Valor del m² en Zona Norte", date: "Enero 2024", tag: "ESTADÍSTICAS", image: prop3 }
+  ];
 
   return (
     <div className="min-h-screen bg-[#FBFBFB] text-[#1D1D1F] font-sans selection:bg-[#2F4F4F] selection:text-white">
@@ -142,7 +152,7 @@ const App = () => {
                 Solicitar Tasación
                 <ChevronRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="https://wa.me/yournumber" className="border border-gray-300 px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 transition-all flex items-center justify-center">
+              <a href="https://wa.me/5491134553693" className="border border-gray-300 px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 transition-all flex items-center justify-center">
                 Contactar por WhatsApp
               </a>
             </div>
@@ -155,10 +165,11 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <div className="relative group">
             <div className="aspect-[4/5] bg-gray-100 rounded-3xl overflow-hidden relative glass-card">
-              <div className="absolute inset-0 flex items-center justify-center text-gray-300">
-                <User size={120} strokeWidth={1} />
-              </div>
-              {/* Image Placeholder */}
+              <img
+                src={ramiroProfile}
+                alt="Ramiro Villafañe"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
               <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/70 backdrop-blur-md rounded-2xl border border-white/40">
                 <p className="font-bold text-lg mb-1">Ramiro Villafañe</p>
                 <p className="text-sm text-[#2F4F4F]">Lic. en Publicidad | Asesor Estratégico</p>
@@ -307,13 +318,10 @@ const App = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: "Tendencias inmobiliarias 2024", date: "Marzo 2024", tag: "TENDENCIAS" },
-              { title: "Movimiento de tasas y crédito", date: "Febrero 2024", tag: "FINANZAS" },
-              { title: "Valor del m² en Zona Norte", date: "Enero 2024", tag: "ESTADÍSTICAS" }
-            ].map((post, i) => (
+            {blogPosts.map((post, i) => (
               <div key={i} className="group cursor-pointer">
                 <div className="aspect-video bg-gray-100 rounded-2xl mb-6 overflow-hidden relative">
+                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-md text-[10px] font-bold text-[#2F4F4F] tracking-widest">
                     {post.tag}
                   </div>
@@ -451,7 +459,7 @@ const App = () => {
 
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/yournumber"
+        href="https://wa.me/5491134553693"
         className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-50"
       >
         <MessageCircle size={32} />
