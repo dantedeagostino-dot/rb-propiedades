@@ -15,14 +15,34 @@ import {
   Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import ramiroProfile from './assets/ramiro.jpeg';
 import prop1 from './assets/prop1.jpeg';
 import prop2 from './assets/prop2.jpeg';
 import prop3 from './assets/prop3.jpeg';
+import MarketAnalysis from './components/MarketAnalysis';
 
-const App = () => {
+const ScrollToSection = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [hash]);
+
+  return null;
+};
+
+const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,14 +88,14 @@ const App = () => {
   };
 
   const blogPosts = [
-    { title: "Tendencias inmobiliarias 2024", date: "Marzo 2024", tag: "TENDENCIAS", image: prop1 },
-    { title: "Movimiento de tasas y crédito", date: "Febrero 2024", tag: "FINANZAS", image: prop2 },
-    { title: "Valor del m² en Zona Norte", date: "Enero 2024", tag: "ESTADÍSTICAS", image: prop3 }
+    { title: "Tendencias inmobiliarias 2026", date: "Proyección 2026", tag: "TENDENCIAS", image: prop1 },
+    { title: "Movimiento de tasas y crédito", date: "Proyección 2026", tag: "FINANZAS", image: prop2 },
+    { title: "Valor del m² en Zona Norte", date: "Proyección 2026", tag: "ESTADÍSTICAS", image: prop3 }
   ];
 
   return (
-    <div className="min-h-screen bg-[#FBFBFB] text-[#1D1D1F] font-sans selection:bg-[#2F4F4F] selection:text-white">
-
+    <>
+      <ScrollToSection />
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-16">
@@ -312,14 +332,17 @@ const App = () => {
               <span className="text-[#2F4F4F] font-semibold tracking-widest uppercase text-sm mb-4 block">Conocimiento</span>
               <h3 className="text-4xl font-bold tracking-tight">Análisis de Mercado</h3>
             </div>
-            <button className="hidden md:flex items-center text-[#2F4F4F] font-bold uppercase tracking-widest text-xs group">
+            <button
+              onClick={() => navigate('/analisis-mercado')}
+              className="hidden md:flex items-center text-[#2F4F4F] font-bold uppercase tracking-widest text-xs group"
+            >
               Ver todos los artículos <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {blogPosts.map((post, i) => (
-              <div key={i} className="group cursor-pointer">
+              <div key={i} className="group cursor-pointer" onClick={() => navigate('/analisis-mercado')}>
                 <div className="aspect-video bg-gray-100 rounded-2xl mb-6 overflow-hidden relative">
                   <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-md text-[10px] font-bold text-[#2F4F4F] tracking-widest">
@@ -367,27 +390,38 @@ const App = () => {
             </div>
 
             <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100">
-              <form className="space-y-6">
+              <form
+                action="https://formsubmit.co/Ramiroivanvillafane98@gmail.com"
+                method="POST"
+                className="space-y-6"
+              >
+                {/* Honeypot for spam protection */}
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+                {/* Disable captcha */}
+                <input type="hidden" name="_captcha" value="false" />
+                {/* Success redirection */}
+                <input type="hidden" name="_next" value={window.location.href} />
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Nombre</label>
-                    <input type="text" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="Su nombre" />
+                    <input type="text" name="name" required className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="Su nombre" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">WhatsApp</label>
-                    <input type="tel" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="+54 9..." />
+                    <input type="tel" name="phone" required className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="+54 9..." />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Barrio / Zona</label>
-                  <input type="text" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="Ej: Nordelta, Pilar..." />
+                  <input type="text" name="zone" required className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="Ej: Nordelta, Pilar..." />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Tipo de Propiedad</label>
-                    <select className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none appearance-none">
+                    <select name="property_type" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none appearance-none">
                       <option>Casa</option>
                       <option>Departamento</option>
                       <option>Lote / Terreno</option>
@@ -396,13 +430,13 @@ const App = () => {
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Rango Estimado</label>
-                    <input type="text" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="USD" />
+                    <input type="text" name="price_range" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="USD" />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 ml-1">Email</label>
-                  <input type="email" className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="nombre@ejemplo.com" />
+                  <input type="email" name="email" required className="w-full bg-[#FBFBFB] border-none rounded-xl p-4 focus:ring-2 focus:ring-[#2F4F4F]/20 transition-all outline-none" placeholder="nombre@ejemplo.com" />
                 </div>
 
                 <button type="submit" className="w-full bg-[#2F4F4F] text-white py-5 rounded-2xl font-bold text-lg hover:bg-[#1D1D1F] transition-all shadow-lg shadow-[#2F4F4F]/20">
@@ -434,7 +468,7 @@ const App = () => {
                 <div className="flex space-x-4">
                   <a href="https://www.instagram.com/ramirovillafane.propiedades" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 hover:text-[#2F4F4F] hover:bg-[#2F4F4F]/5 transition-all">
                     <span className="sr-only">Instagram</span>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
                   </a>
                 </div>
               </div>
@@ -475,6 +509,19 @@ const App = () => {
           scroll-behavior: smooth;
         }
       `}</style>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <div className="min-h-screen bg-[#FBFBFB] text-[#1D1D1F] font-sans selection:bg-[#2F4F4F] selection:text-white">
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/analisis-mercado" element={<MarketAnalysis />} />
+        </Routes>
+      </Router>
     </div>
   );
 };
